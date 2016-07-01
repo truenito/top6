@@ -34,7 +34,7 @@ module UserRankings
     # Arrange by max frequency to find the user with the most creations.
     creator_id = creator_ids_array.max_by { |v| freq[v] }
     frequency = freq[creator_id]
-
+    return nil if creator_id.nil?
     most_creations[:user] = User.find(creator_id)
     most_creations[:count] = frequency
 

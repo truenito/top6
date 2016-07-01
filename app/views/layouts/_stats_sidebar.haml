@@ -4,7 +4,7 @@
     %a.featured-single{:href => "single.html"}
       %span.featured-data
         %span.designation
-          - if @sidebar_stats[:most_captains].nil?
+          - if @sidebar_stats[:most_captains].nil? || @sidebar_stats[:most_captains] == false
             %span todavía no hay un capitanazo.
           - else
             %span= @sidebar_stats[:most_captains][:user].name
