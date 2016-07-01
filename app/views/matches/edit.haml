@@ -23,16 +23,16 @@
           .location= " " + time_ago_in_words(@match.created_at) match_token
 
 .col-md-12
-  %h3.heading-centered{style: 'color: green;'} RADIANT TEAM
+  %h3.heading-centered{style: 'color: green;'} blue TEAM
   .col-md-12.job-listing-full
     .clearfix
     .job-list-head.clearfix.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
       %ul.job-listings
-        - @radiant_team.users.each do |player|
+        - @blue_team.users.each do |player|
           %li.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
             .title
               %span.prof-photo
-                = link_to(image_tag('avatars/radiant.png'"user/#{player.regular_name}"'#')
+                = link_to(image_tag('avatars/blue.png'"user/#{player.regular_name}"'#')
               %span.designation
                 = link_to(player.name, "/user/#{player.regular_name}")
                 %br
@@ -44,21 +44,21 @@
             .location
               rating:
               = player.rating
-            .location{:class => ("captain" if @radiant_team.captain_id == player.id)}= @radiant_team.captain_id == player.id ? "CAPTAIN" : "player"
+            .location{:class => ("captain" if @blue_team.captain_id == player.id)}= @blue_team.captain_id == player.id ? "CAPTAIN" : "player"
             .create= player.status
             .create= "W:#{player.win_count} / L:#{player.lose_count}"
 
 .col-md-12
-  %h3.heading-centered{style: 'color: rgb(181, 62, 76);'} DIRE TEAM
+  %h3.heading-centered{style: 'color: rgb(181, 62, 76);'} red TEAM
   .col-md-12.job-listing-full
     .clearfix
     .job-list-head.clearfix.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
       %ul.job-listings
-        - @dire_team.users.each do |player|
+        - @red_team.users.each do |player|
           %li.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
             .title
               %span.prof-photo
-                = link_to(image_tag('avatars/dire.png'), "user/#{player.regular_name}")
+                = link_to(image_tag('avatars/red.png'), "user/#{player.regular_name}")
               %span.designation
                 = link_to(player.name, "/user/#{player.regular_name}")
                 %br
@@ -70,6 +70,6 @@
             .location
               rating:
               = player.rating
-            .location{:class => ("captain" if @dire_team.captain_id == player.id)}= @dire_team.captain_id == player.id ? "CAPTAIN" : "player"
+            .location{:class => ("captain" if @red_team.captain_id == player.id)}= @red_team.captain_id == player.id ? "CAPTAIN" : "player"
             .create= player.status
             .create= "W:#{player.win_count} / L:#{player.lose_count}"

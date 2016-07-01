@@ -21,7 +21,7 @@ class MatchesController < ActionController::Base
 
     @match_token = MatchToken.from_user_and_match(current_user, params[:id]) \
     if current_user && current_user.in_match?(@match.id)
-    (@rating_change = Team.rating_change(@radiant_team_avg, @dire_team_avg)) \
+    (@rating_change = Team.rating_change(@blue_team_avg, @red_team_avg)) \
     if @match.teams.any?
 
     respond_to do |format|
@@ -53,8 +53,8 @@ class MatchesController < ActionController::Base
     @match = Match.find(params[:id])
     if current_user && current_user.match_tokens.exists?(match_id: @match.id)
       @players = @match.users
-      @radiant_team = @match.teams.first
-      @dire_team = @match.teams.last
+      @blue_team = @match.teams.first
+      @red_team = @match.teams.last
     else
       redirect_to root_path
     end
@@ -137,30 +137,30 @@ class MatchesController < ActionController::Base
   # TODO: @truenito simplify, refactor, DRY up.
   def establish_match_entities(match)
     @creator = User.find(match.creator_id)
-    @radiant_team = match.teams.first
-    @radiant_captain_id = @radiant_team.captain_id if match.teams.any?
-    @dire_team = match.teams.last
-    @dire_captain_id = @dire_team.captain_id if match.teams.any?
+    @blue_team = match.teams.first
+    @blue_captain_id = @blue_team.captain_id if match.teams.any?
+    @red_team = match.teams.last
+    @red_captain_id = @red_team.captain_id if match.teams.any?
     players = match.users.order('match_tokens.created_at ASC')
     @players = players.decorate
     frozen_users_and_stats(match) if match.ended? && !match.users_and_stats.nil?
 
-    return true if @radiant_team.nil?
+    return true if @blue_team.nil?
     if match.ended? && match.users_and_stats.present?
-      @radiant_team_avg = Team.rating_average @radiant_team
-      @dire_team_avg = Team.rating_average @dire_team
+      @blue_team_avg = Team.rating_average @blue_team, match
+      @red_team_avg = Team.rating_average @red_team, match
     else
-      @radiant_team_avg = (@radiant_team.users.sum(:rating) / @radiant_team.users.count)
-      @dire_team_avg = (@dire_team.users.sum(:rating) / @dire_team.users.count)
+      @blue_team_avg = (@blue_team.users.sum(:rating) / @blue_team.users.count)
+      @red_team_avg = (@red_team.users.sum(:rating) / @red_team.users.count)
     end
   end
 
   def frozen_users_and_stats(match)
-    radiant_team_str_ids = @radiant_team.users.pluck(:id).map!(&:to_s)
-    @radiant_team = match.users_and_stats.select { |u| radiant_team_str_ids.include? u['id'] }
+    blue_team_str_ids = @blue_team.users.pluck(:id).map!(&:to_s)
+    @blue_team = match.users_and_stats.select { |u| blue_team_str_ids.include? u['id'] }
 
-    dire_team_str_ids = @dire_team.users.pluck(:id).map!(&:to_s)
-    @dire_team = match.users_and_stats.select { |u| dire_team_str_ids.include? u['id'] }
+    red_team_str_ids = @red_team.users.pluck(:id).map!(&:to_s)
+    @red_team = match.users_and_stats.select { |u| red_team_str_ids.include? u['id'] }
   end
 
   private

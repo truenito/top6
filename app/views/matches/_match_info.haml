@@ -28,7 +28,7 @@
             .create
               %span{style: 'color: rgb(181, 62, 76);'} sin decisión
           - else
-            .create= @match.winner_team == 0 ? 'Dire' : 'Radiant'
+            .create= @match.winner_team == 0 ? 'red' : 'blue'
 - unless @new_players_count.nil? || @new_players_count.zero?
   - if @new_players_count == 1
     :javascript

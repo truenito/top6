@@ -15,7 +15,7 @@ def create_and_save_match_token(user, match)
   match_token
 end
 
-def update_match_tokens(match, user_count = 6, result = 'radiant')
+def update_match_tokens(match, user_count = 6, result = 'blue')
   match.users.take(user_count).each do |user|
     match_token = MatchToken.from_user_and_match(user.id, match.id)
     match_token.result = result

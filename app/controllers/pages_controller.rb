@@ -7,6 +7,8 @@ class PagesController < ApplicationController
 
   def rules; end
 
+  def opening; end
+
   def mobiles
     render layout: false
   end

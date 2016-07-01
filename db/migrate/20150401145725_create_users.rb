@@ -1,7 +1,7 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.integer :steam_id
+      t.integer :battlenet_id
       t.string :name
       t.string :status, :default => 'unvouched'
       t.integer :rating, :default => 3500

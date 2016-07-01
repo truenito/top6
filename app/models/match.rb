@@ -43,7 +43,7 @@ class Match < ActiveRecord::Base
     freq = Hash.new(0)
     voted_results = match_tokens.map(&:result)
     voted_results.each { |v| freq[v] += 1 }
-    freq['radiant'] >= 6 || freq['canceled'] >= 6 || freq['dire'] >= 6 ? true : false
+    freq['blue'] >= 6 || freq['canceled'] >= 6 || freq['red'] >= 6 ? true : false
   end
 
   def vote_frequency
@@ -103,25 +103,25 @@ class Match < ActiveRecord::Base
       @shuffles += 1
       distribute_players players_pool_array
 
-      check_separation @radiant_avg, @dire_avg, @min_separation
+      check_separation @blue_avg, @red_avg, @min_separation
     end
 
-    assign_teams @radiant_array, @dire_array
+    assign_teams @blue_array, @red_array
   end
 
-  # Distributes players between radiant and dire from a shuffled player array.
+  # Distributes players between blue and red from a shuffled player array.
   def distribute_players(players_pool_array)
-    @radiant_array, @radiant_avg = players_pool_array.first(5), 0
-    @dire_array, @dire_avg = players_pool_array.last(5), 0
+    @blue_array, @blue_avg = players_pool_array.first(5), 0
+    @red_array, @red_avg = players_pool_array.last(5), 0
 
-    @radiant_array.each { |player| @radiant_avg += player[1] }
-    @dire_array.each { |player| @dire_avg += player[1] }
+    @blue_array.each { |player| @blue_avg += player[1] }
+    @red_array.each { |player| @red_avg += player[1] }
   end
 
   # Checks if team rating averages meet minimum separation, if not reshuffles,
   # additionally, checks if if it's needed to increase the minimun separation.
-  def check_separation(radiant_avg, dire_avg, min_separation)
-    if (radiant_avg - dire_avg).abs < min_separation
+  def check_separation(blue_avg, red_avg, min_separation)
+    if (blue_avg - red_avg).abs < min_separation
       @balanced = true
     else
       @balanced = false
@@ -133,13 +133,13 @@ class Match < ActiveRecord::Base
   end
 
   # Assigns the players to a temp team hash in order to create the real teams.
-  def assign_teams(radiant_array, dire_array)
-    dire = []
-    radiant = []
-    radiant_array.each { |player| radiant << User.find(player.first) }
-    dire_array.each { |player| dire << User.find(player.first) }
+  def assign_teams(blue_array, red_array)
+    red = []
+    blue = []
+    blue_array.each { |player| blue << User.find(player.first) }
+    red_array.each { |player| red << User.find(player.first) }
 
-    { radiant: radiant, dire: dire }
+    { blue: blue, red: red }
   end
 
   # Saves frozen user attributes for future reference i.e: actual rating at the
@@ -154,7 +154,7 @@ class Match < ActiveRecord::Base
   def commit
     return false unless committable?
     result = vote_frequency.reject { |_k, v| v < 6 }.keys.first
-    if result == 'radiant' || result == 'dire'
+    if result == 'blue' || result == 'red'
       winner_team = teams.where(side: result)
       loser_team = (teams - winner_team).first
       winner_team = winner_team.first
@@ -174,10 +174,10 @@ class Match < ActiveRecord::Base
     # Check how much player rating going to change.
     rating_change = calculate_rating_change(winner_team, loser_team)
 
-    if result == 'radiant'
-      users.each { |u| update_user_rating(u, winner_team, rating_change, 'dire') }
+    if result == 'blue'
+      users.each { |u| update_user_rating(u, winner_team, rating_change, 'red') }
     else
-      users.each { |u| update_user_rating(u, winner_team, rating_change, 'radiant') }
+      users.each { |u| update_user_rating(u, winner_team, rating_change, 'blue') }
     end
   end
 
@@ -211,9 +211,9 @@ class Match < ActiveRecord::Base
 
   # Saves match result information for teams and sets "ended" status.
   def finalize_match(result)
-    if result == 'radiant'
+    if result == 'blue'
       self.winner_team = false
-    elsif result == 'dire'
+    elsif result == 'red'
       self.winner_team = true
     end
     match_tokens.each { |t| t.result = winner_team; t.save! }

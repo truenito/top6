@@ -44,39 +44,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: leavers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE leavers (
-    id integer NOT NULL,
-    user_id integer,
-    match_id integer,
-    rating_loss integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: leavers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE leavers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: leavers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE leavers_id_seq OWNED BY leavers.id;
-
-
---
 -- Name: match_tokens; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -86,6 +53,7 @@ CREATE TABLE match_tokens (
     user_id integer,
     result character varying,
     captain boolean,
+    leaver boolean DEFAULT false,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -116,13 +84,10 @@ ALTER SEQUENCE match_tokens_id_seq OWNED BY match_tokens.id;
 
 CREATE TABLE matches (
     id integer NOT NULL,
-    steam_id integer,
-    radiant_team_id integer,
-    dire_team_id integer,
+    battlenet_id integer,
     password character varying,
     name character varying,
     status character varying DEFAULT 'waiting'::character varying,
-    rating_differential integer,
     creator_id integer,
     winner_team boolean,
     created_at timestamp without time zone NOT NULL,
@@ -208,7 +173,7 @@ CREATE TABLE teams_users (
 
 CREATE TABLE users (
     id integer NOT NULL,
-    steam_id integer,
+    battlenet_id integer,
     name character varying,
     status character varying DEFAULT 'unvouched'::character varying,
     rating integer DEFAULT 3500,
@@ -267,13 +232,6 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY leavers ALTER COLUMN id SET DEFAULT nextval('leavers_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY match_tokens ALTER COLUMN id SET DEFAULT nextval('match_tokens_id_seq'::regclass);
 
 
@@ -296,14 +254,6 @@ ALTER TABLE ONLY teams ALTER COLUMN id SET DEFAULT nextval('teams_id_seq'::regcl
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
-
-
---
--- Name: leavers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY leavers
-    ADD CONSTRAINT leavers_pkey PRIMARY KEY (id);
 
 
 --
@@ -390,8 +340,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150401211511');
 INSERT INTO schema_migrations (version) VALUES ('20150401211730');
 
 INSERT INTO schema_migrations (version) VALUES ('20150402130828');
-
-INSERT INTO schema_migrations (version) VALUES ('20150407140046');
 
 INSERT INTO schema_migrations (version) VALUES ('20150408034451');
 

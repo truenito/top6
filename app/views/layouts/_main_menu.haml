@@ -25,6 +25,11 @@
               %li= mail_to('gabriel@estilopanda.com', 'Contacto')
           %li.col-sm-3
             %ul
+              %li.dropdown-header Torneos
+              %li.divider
+              %li= link_to('El opening', el_opening_path)
+          %li.col-sm-3
+            %ul
               %li.dropdown-header Premios de la Beta Season
               %li.divider
               #menu-carousel.carousel.slide{"data-ride" => "carousel", "data-interval" => "2500"}
