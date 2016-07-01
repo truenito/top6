@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-07-01T10:26:52-04:00">2016-07-01T10:26:52-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-07-01T10:52:52-04:00">2016-07-01T10:52:52-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         640.74
+         719.27
        </span>
     </span> hits/line)
   </h2>
@@ -57,7 +57,7 @@
         <td>117</td>
         <td>114</td>
         <td>3</td>
-        <td>2743.9</td>
+        <td>3081.5</td>
       </tr>
       
       <tr>
@@ -1006,20 +1006,20 @@
           <code class="ruby">    while @balanced == false</code>
         </li>
       
-        <li class="covered" data-hits="15253" data-linenumber="102">
-          <span class="hits">15253</span>
+        <li class="covered" data-hits="17134" data-linenumber="102">
+          <span class="hits">17134</span>
           
           <code class="ruby">      players_pool_array.shuffle!</code>
         </li>
       
-        <li class="covered" data-hits="15253" data-linenumber="103">
-          <span class="hits">15253</span>
+        <li class="covered" data-hits="17134" data-linenumber="103">
+          <span class="hits">17134</span>
           
           <code class="ruby">      @shuffles += 1</code>
         </li>
       
-        <li class="covered" data-hits="15253" data-linenumber="104">
-          <span class="hits">15253</span>
+        <li class="covered" data-hits="17134" data-linenumber="104">
+          <span class="hits">17134</span>
           
           <code class="ruby">      distribute_players players_pool_array</code>
         </li>
@@ -1030,8 +1030,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="15253" data-linenumber="106">
-          <span class="hits">15253</span>
+        <li class="covered" data-hits="17134" data-linenumber="106">
+          <span class="hits">17134</span>
           
           <code class="ruby">      check_separation @blue_avg, @red_avg, @min_separation</code>
         </li>
@@ -1078,14 +1078,14 @@
           <code class="ruby">  def distribute_players(players_pool_array)</code>
         </li>
       
-        <li class="covered" data-hits="15253" data-linenumber="114">
-          <span class="hits">15253</span>
+        <li class="covered" data-hits="17134" data-linenumber="114">
+          <span class="hits">17134</span>
           
           <code class="ruby">    @blue_array, @blue_avg = players_pool_array.first(5), 0</code>
         </li>
       
-        <li class="covered" data-hits="15253" data-linenumber="115">
-          <span class="hits">15253</span>
+        <li class="covered" data-hits="17134" data-linenumber="115">
+          <span class="hits">17134</span>
           
           <code class="ruby">    @red_array, @red_avg = players_pool_array.last(5), 0</code>
         </li>
@@ -1096,14 +1096,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="91518" data-linenumber="117">
-          <span class="hits">91518</span>
+        <li class="covered" data-hits="102804" data-linenumber="117">
+          <span class="hits">102804</span>
           
           <code class="ruby">    @blue_array.each { |player| @blue_avg += player[1] }</code>
         </li>
       
-        <li class="covered" data-hits="91518" data-linenumber="118">
-          <span class="hits">91518</span>
+        <li class="covered" data-hits="102804" data-linenumber="118">
+          <span class="hits">102804</span>
           
           <code class="ruby">    @red_array.each { |player| @red_avg += player[1] }</code>
         </li>
@@ -1138,8 +1138,8 @@
           <code class="ruby">  def check_separation(blue_avg, red_avg, min_separation)</code>
         </li>
       
-        <li class="covered" data-hits="15253" data-linenumber="124">
-          <span class="hits">15253</span>
+        <li class="covered" data-hits="17134" data-linenumber="124">
+          <span class="hits">17134</span>
           
           <code class="ruby">    if (blue_avg - red_avg).abs &lt; min_separation</code>
         </li>
@@ -1156,26 +1156,26 @@
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="15248" data-linenumber="127">
-          <span class="hits">15248</span>
+        <li class="covered" data-hits="17129" data-linenumber="127">
+          <span class="hits">17129</span>
           
           <code class="ruby">      @balanced = false</code>
         </li>
       
-        <li class="covered" data-hits="15248" data-linenumber="128">
-          <span class="hits">15248</span>
+        <li class="covered" data-hits="17129" data-linenumber="128">
+          <span class="hits">17129</span>
           
           <code class="ruby">      if @shuffles &gt; 1000</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="129">
-          <span class="hits">15</span>
+        <li class="covered" data-hits="17" data-linenumber="129">
+          <span class="hits">17</span>
           
           <code class="ruby">        @min_separation += 3</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="130">
-          <span class="hits">15</span>
+        <li class="covered" data-hits="17" data-linenumber="130">
+          <span class="hits">17</span>
           
           <code class="ruby">        @shuffles = 0</code>
         </li>
