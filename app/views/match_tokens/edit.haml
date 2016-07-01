@@ -14,7 +14,7 @@
       .centered
         - if @match.status == 'playing'
           = form_for @match_token, html: {class: "nifty_form"} do |f|
-            - ['radiant', 'dire', 'canceled'].each do |result|
+            - ['blue', 'red', 'canceled'].each do |result|
               %label.match-result-radio.col-md-8{class: result}
                 = f.radio_button 'result', result
                 - if result == 'canceled'
@@ -23,7 +23,7 @@
                   = "Ganó #{result.humanize}"
             = f.submit "VOTAR", class: 'input-button', data: { confirm: 'Está seguro que seleccionó correctamente?'}
         - if @match.status == 'ended'
-          = @match.winner_team == false ? 'Match terminado, ganó: RADIANT' :  'Match terminado, ganó: DIRE'
+          = @match.winner_team == false ? 'Match terminado, ganó: blue' :  'Match terminado, ganó: red'
       .col-md-12.job-listing-full
         .job-list-head.clearfix.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
           %ul.job-listings
@@ -38,18 +38,18 @@
                 = @match.pretty_status
 
     .col-md-12
-      %h3.heading-centered{style: 'color: green;'} RADIANT TEAM
+      %h3.heading-centered{style: 'color: green;'} blue TEAM
       .col-md-3.pull-right{style: 'padding: 0;'}
         %h6{style: 'text-align: right;'}
       .col-md-12.job-listing-full{style: 'padding-top: 0px;'}
         .clearfix
         .job-list-head.clearfix.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
           %ul.job-listings
-            - @radiant_team.users.decorate.each do |player|
+            - @blue_team.users.decorate.each do |player|
               %li.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
                 .title
                   %span.prof-photo
-                    = link_to(image_tag('avatars/radiant.png'), "/user/#{player.regular_name}")
+                    = link_to(image_tag('avatars/blue.png'), "/user/#{player.regular_name}")
                   %span.designation
                     - if player.reported?(@match)
                       = link_to("/user/#{player.regular_name}") do
@@ -60,20 +60,20 @@
                 .location
                   rating:
                   = player.rating
-                .location{:class => ("captain" if @radiant_team.captain_id == player.id)}= @radiant_team.captain_id == player.id ? "CAPTAIN" : "player"
+                .location{:class => ("captain" if @blue_team.captain_id == player.id)}= @blue_team.captain_id == player.id ? "CAPTAIN" : "player"
     .col-md-12
-      %h3.heading-centered{style: 'color: rgb(181, 62, 76);'} DIRE TEAM
+      %h3.heading-centered{style: 'color: rgb(181, 62, 76);'} red TEAM
       .col-md-3.pull-right{style: 'padding: 0;'}
         %h6{style: 'text-align: right;'}
       .col-md-12.job-listing-full{style: 'padding-top: 0px;'}
         .clearfix
         .job-list-head.clearfix.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
           %ul.job-listings
-            - @dire_team.users.decorate.each do |player|
+            - @red_team.users.decorate.each do |player|
               %li.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
                 .title
                   %span.prof-photo
-                    = link_to(image_tag('avatars/dire.png'), "/user/#{player.regular_name}")
+                    = link_to(image_tag('avatars/red.png'), "/user/#{player.regular_name}")
                   %span.designation
                     - if player.reported?(@match)
                       = link_to("/user/#{player.regular_name}") do
@@ -84,10 +84,10 @@
                 .location
                   rating:
                   = player.rating
-                .location{:class => ("captain" if @dire_team.captain_id == player.id)}= @dire_team.captain_id == player.id ? "CAPTAIN" : "player"
+                .location{:class => ("captain" if @red_team.captain_id == player.id)}= @red_team.captain_id == player.id ? "CAPTAIN" : "player"
 
 
 :css
-  .radiant{background-color: rgb(65, 199, 65); margin-bottom: 5px;   border: 3px black solid;}
-  .dire{background-color:  rgb(229, 59, 59); margin-bottom: 5px;   border: 3px black solid;}
+  .blue{background-color: rgb(65, 199, 65); margin-bottom: 5px;   border: 3px black solid;}
+  .red{background-color:  rgb(229, 59, 59); margin-bottom: 5px;   border: 3px black solid;}
   .canceled{font-size: 20px; color: black !important;   border: 3px black solid;}

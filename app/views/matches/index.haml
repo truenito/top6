@@ -32,7 +32,7 @@
                     %span{style: 'color: rgb(181, 62, 76);'} sin decisión
                 - else
                   = "winner: "
-                  = match.winner_team == false ? 'radiant' : 'dire'
+                  = match.winner_team == false ? 'blue' : 'red'
             - else
               = link_to match_path(match) do
                 %li.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
@@ -50,7 +50,7 @@
                   - else
                     .create
                       = "winner: "
-                      = match.winner_team == false ? 'radiant' : 'dire'
+                      = match.winner_team == false ? 'blue' : 'red'
       - else
         .centered
           %span= "No se ha jugado ningún match, #{link_to 'TEN EL PRIMERO!', new_match_path}".html_safe

@@ -42,10 +42,10 @@ class MatchTokensController < ActionController::Base
 
   def establish_match_entities(match)
     @players = match.users.decorate
-    @radiant_team = match.teams.first
-    @dire_team = match.teams.last
-    @radiant_radiant_teamvg = @radiant_team.users.sum(:rating) / 5
-    @dire_radiant_teamvg = @dire_team.users.sum(:rating) / 5
+    @blue_team = match.teams.first
+    @red_team = match.teams.last
+    @blue_teamvg = @blue_team.users.sum(:rating) / 5
+    @red_teamvg = @red_team.users.sum(:rating) / 5
   end
 
   private

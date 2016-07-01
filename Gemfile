@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.4'
+ruby '2.2.3'
 
 # Authentication
 gem 'devise'
@@ -10,29 +10,32 @@ gem 'cancan'
 gem 'figaro'
 
 # Core
-gem 'rails', '4.2.0'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'rails'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 gem 'haml'
 gem 'rails_admin'
 
 # Database
 gem 'pg'
 
+# API
+gem 'jbuilder'
+gem 'kaminari'
+
 # Goodies
-gem 'draper', '~> 1.3'
+gem 'draper'
 gem 'newrelic_rpm'
 gem 'puma'
 gem 'rails_12factor', group: :production
-gem 'jquery-datatables-rails', '~> 3.2.0'
+gem 'jquery-datatables-rails'
 gem 'dota'
 gem 'elo_rating'
-gem 'best_in_place', '~> 3.0.1'
+gem 'best_in_place'
 
 # Enviornment specifics
 group :production do
@@ -43,8 +46,8 @@ group :development, :test do
   gem 'byebug'
   gem 'better_errors'
   gem 'pry'
-  gem 'web-console', '~> 2.0'
-  gem "codeclimate-test-reporter"
+  gem 'web-console'
+  gem 'codeclimate-test-reporter'
 
   # Testing
   gem 'factory_girl_rails'

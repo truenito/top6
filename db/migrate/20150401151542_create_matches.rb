@@ -1,7 +1,7 @@
 class CreateMatches < ActiveRecord::Migration
   def change
     create_table :matches do |t|
-      t.integer :steam_id
+      t.integer :battlenet_id
       t.string :password
       t.string :name
       t.string :status, default: "waiting"

@@ -6,29 +6,29 @@
       %p
         %i.playing Para partidas futuras ya se ha implementado esta funcionalidad.
 .col-md-12
-  %h3.heading-centered{style: 'color: green;'} RADIANT TEAM
+  %h3.heading-centered{style: 'color: green;'} blue TEAM
   .col-md-3.pull-right{style: 'padding: 0;'}
     %h6{style: 'text-align: right;'}
       Average MMR:
-      = @radiant_team_avg
+      = @blue_team_avg
   .col-md-3.pull-right{style: 'padding: 0;'}
     %h6{style: 'text-align: right;'}
       Win:
       +
-      = @rating_change[:dire]
+      = @rating_change[:red]
       ="/"
       ="-"
       Lose:
-      = @rating_change[:radiant]
+      = @rating_change[:blue]
   .col-md-12.job-listing-full{style: 'padding-top: 0px;'}
     .clearfix
     .job-list-head.clearfix.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
       %ul.job-listings
-        - @radiant_team.users.decorate.each do |player|
+        - @blue_team.users.decorate.each do |player|
           %li.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
             .title
               %span.prof-photo
-                = link_to(image_tag('avatars/radiant.png'), "/user/#{player.regular_name}")
+                = link_to(image_tag('avatars/blue.png'), "/user/#{player.regular_name}")
               %span.designation
                 - if player.reported?(@match)
                   = link_to("/user/#{player.regular_name}") do
@@ -39,31 +39,31 @@
             .location
               rating:
               = player.rating
-            .location{:class => ("captain" if @radiant_team.captain_id == player.id)}= @radiant_team.captain_id == player.id ? "CAPTAIN" : "player"
+            .location{:class => ("captain" if @blue_team.captain_id == player.id)}= @blue_team.captain_id == player.id ? "CAPTAIN" : "player"
 .col-md-12
-  %h3.heading-centered{style: 'color: rgb(181, 62, 76);'} DIRE TEAM
+  %h3.heading-centered{style: 'color: rgb(181, 62, 76);'} red TEAM
   .col-md-3.pull-right{style: 'padding: 0;'}
     %h6{style: 'text-align: right;'}
       Average MMR:
-      = @dire_team_avg
+      = @red_team_avg
   .col-md-3.pull-right{style: 'padding: 0;'}
     %h6{style: 'text-align: right;'}
       Win:
       +
-      = @rating_change[:radiant]
+      = @rating_change[:blue]
       = "/"
       ="-"
       Lose:
-      = @rating_change[:dire]
+      = @rating_change[:red]
   .col-md-12.job-listing-full{style: 'padding-top: 0px;'}
     .clearfix
     .job-list-head.clearfix.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
       %ul.job-listings
-        - @dire_team.users.decorate.each do |player|
+        - @red_team.users.decorate.each do |player|
           %li.animated{"data-animation" => "fadeInUp", "data-animation-delay" => "100"}
             .title
               %span.prof-photo
-                = link_to(image_tag('avatars/dire.png'), "/user/#{player.regular_name}")
+                = link_to(image_tag('avatars/red.png'), "/user/#{player.regular_name}")
               %span.designation
                 - if player.reported?(@match)
                   = link_to("/user/#{player.regular_name}") do
@@ -74,4 +74,4 @@
             .location
               rating:
               = player.rating
-            .location{:class => ("captain" if @dire_team.captain_id == player.id)}= @dire_team.captain_id == player.id ? "CAPTAIN" : "player"
+            .location{:class => ("captain" if @red_team.captain_id == player.id)}= @red_team.captain_id == player.id ? "CAPTAIN" : "player"

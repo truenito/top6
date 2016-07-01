@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/contact' => 'pages#contact'
   get '/reglas' => 'pages#rules'
   get '/nosotros' => 'pages#about'
+  get '/el-opening' => 'pages#opening'
+
   get '/match_info' => 'matches#match_info'
   get '/live_matches' => 'home#live_matches'
 

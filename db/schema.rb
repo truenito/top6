@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150430215029) do
   end
 
   create_table "matches", force: :cascade do |t|
-    t.integer  "steam_id"
+    t.integer  "battlenet_id"
     t.string   "password"
     t.string   "name"
     t.string   "status",      default: "waiting"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150430215029) do
   add_index "teams_users", ["user_id"], name: "index_teams_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.integer  "steam_id"
+    t.integer  "battlenet_id"
     t.string   "name"
     t.string   "status",                 default: "unvouched"
     t.integer  "rating",                 default: 3500

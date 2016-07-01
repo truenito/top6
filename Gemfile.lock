@@ -288,39 +288,43 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby
-  best_in_place (~> 3.0.1)
+  best_in_place
   better_errors
   byebug
   cancan
   codeclimate-test-reporter
-  coffee-rails (~> 4.1.0)
+  coffee-rails
   devise
   dota
-  draper (~> 1.3)
+  draper
   elo_rating
   factory_girl_rails
   faker
   figaro
   haml
-  jbuilder (~> 2.0)
-  jquery-datatables-rails (~> 3.2.0)
+  jbuilder
+  jquery-datatables-rails
   jquery-rails
+  kaminari
   newrelic_rpm
   omniauth
   omniauth-facebook
   pg
   pry
   puma
-  rails (= 4.2.0)
+  rails
   rails_12factor
   rails_admin
   rspec-rails
-  sass-rails (~> 5.0)
-  sdoc (~> 0.4.0)
+  sass-rails
+  sdoc
   spring
   turbolinks
-  uglifier (>= 1.3.0)
-  web-console (~> 2.0)
+  uglifier
+  web-console
+
+RUBY VERSION
+   ruby 2.2.3p173
 
 BUNDLED WITH
-   1.10.4
+   1.12.5
